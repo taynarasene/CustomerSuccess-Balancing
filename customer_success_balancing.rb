@@ -36,7 +36,7 @@ class CustomerSuccessBalancing
   end
 
   def available_customer
-    @@customers = @customers.select do |customer|
+    @customers = @customers.select do |customer|
       customer_valid?(customer)
     end
   end
@@ -50,12 +50,12 @@ class CustomerSuccessBalancing
 
   def sort_by_score
     @customer_success = @customer_success.sort { |a,b| a[:score] <=> b[:score] }
-    @@customers = @@customers.sort { |a,b| a[:score] <=> b[:score] }
+    @customers = @customers.sort { |a,b| a[:score] <=> b[:score] }
   end
 
   def balance_customer_success
     generate_default_quantity_custumers
-    @@customers.each do |customer|
+    @customers.each do |customer|
       selected_customer_success = assign_customer_to_customer_success_to_customer(customer)
 
       if selected_customer_success
